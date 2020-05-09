@@ -15,18 +15,20 @@ class MineField
 			closed,
 			flagged,
 			exploded
-
+		
+			//State& operator+=(const Vei2& rhs);
 		};
 	
-		State s;
+		State s=State::closed; //s-state
 	
 		Vei2 pos;
 		RectI GetRect();
 		bool hasMine = false;
-
+		void SetState(State in_s);
+		bool StateEq(State in_s);
 
 	};
-	const static int numberoftiles = 10;
+	const static int numberoftiles = 20;
 public:
 	void InitTiles();
 	Tile tiles[numberoftiles][numberoftiles];
