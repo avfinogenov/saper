@@ -3,6 +3,7 @@
 #include "SpriteCodex.h"
 #include "RectI.h"
 #include "Graphics.h"
+#include <random>
 class MineField
 {
 	class Tile
@@ -20,7 +21,7 @@ class MineField
 	
 		Vei2 pos;
 		RectI GetRect();
-
+		bool hasMine = false;
 
 
 	};
@@ -29,6 +30,7 @@ public:
 	void InitTiles();
 	Tile tiles[numberoftiles][numberoftiles];
 	void Draw(Graphics& gfx);
-
+	RectI r = RectI(0, numberoftiles * SpriteCodex::tileSize, 0, numberoftiles * SpriteCodex::tileSize);
+	void PlaceMines();
 };
 

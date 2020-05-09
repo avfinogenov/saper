@@ -6,7 +6,7 @@ void MineField::InitTiles()
 	{
 		for (int j = 0; j < numberoftiles; j++)
 		{
-			tiles[i][j].pos = Vei2((j * SpriteCodex::tileSize+SpriteCodex::tileSize/2), (i * SpriteCodex::tileSize+SpriteCodex::tileSize/2));
+			tiles[i][j].pos = Vei2((j * SpriteCodex::tileSize), (i * SpriteCodex::tileSize));
 		}
 	}
 	
@@ -14,6 +14,7 @@ void MineField::InitTiles()
 
 void MineField::Draw(Graphics& gfx)
 {
+	
 	for (int i = 0; i < numberoftiles; i++)
 	{
 		for (int j = 0; j < numberoftiles; j++)
@@ -21,4 +22,9 @@ void MineField::Draw(Graphics& gfx)
 			SpriteCodex::DrawTileButton(tiles[i][j].pos, gfx);
 		}
 	}
+}
+
+void MineField::PlaceMines()
+{
+
 }

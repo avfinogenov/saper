@@ -43,5 +43,7 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	gfx.DrawRect(field.r, SpriteCodex::baseColor);
 	field.Draw(gfx);
+	
 }
