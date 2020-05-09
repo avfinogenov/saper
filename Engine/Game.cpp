@@ -39,7 +39,15 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	field.Update(wnd.mouse);
+	while (!wnd.mouse.IsEmpty())
+	{
+		const Mouse::Event e = wnd.mouse.Read();
+		if (e.GetType() == Mouse::Event::Type::LPress)
+		{
+			field.Update(wnd.mouse);
+		}
+	}
+	//field.Update(wnd.mouse);
 }
 
 void Game::ComposeFrame()

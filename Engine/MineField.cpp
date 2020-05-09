@@ -88,6 +88,7 @@ void MineField::PlaceMines(int number)
 
 void MineField::Update(Mouse& in_mouse)
 {
+
 	if (in_mouse.LeftIsPressed())
 	{
 		Vei2 tmp = in_mouse.GetPos();
