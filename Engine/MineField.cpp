@@ -44,7 +44,15 @@ void MineField::Draw(Graphics& gfx)
 			switch (tiles[i][j].s)
 			{
 			case (Tile::State::open):
-				SpriteCodex::DrawTile0(tiles[i][j].pos, gfx);
+				if (tiles[i][j].hasMine)
+				{
+					//SpriteCodex::DrawTile0(tiles[i][j].pos, gfx);
+					SpriteCodex::DrawTileBomb(tiles[i][j].pos, gfx);
+				}
+				else
+				{
+					SpriteCodex::DrawTile0(tiles[i][j].pos, gfx);
+				}
 				break;
 
 			case (Tile::State::closed):
@@ -84,17 +92,12 @@ void MineField::Update(Mouse& in_mouse)
 	{
 		Vei2 tmp = in_mouse.GetPos();
 		tmp = ScreenToGrid(tmp);
-		if (tiles[tmp.x][tmp.y].hasMine)
-		{
-
-		}
-		else
-		{
+		
 			if (tiles[tmp.x][tmp.y].StateEq(Tile::State::closed))
 			{
 				tiles[tmp.x][tmp.y].SetState(Tile::State::open);
 			}
-		}
+		
 		
 	}
 }
