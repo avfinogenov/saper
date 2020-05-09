@@ -26,6 +26,7 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd )
 {
+	field.InitTiles();
 }
 
 void Game::Go()
@@ -42,4 +43,5 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	field.Draw(gfx);
 }

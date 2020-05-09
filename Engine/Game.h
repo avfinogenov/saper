@@ -23,7 +23,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
-
+#include "MineField.h"
 class Game
 {
 public:
@@ -43,4 +43,5 @@ private:
 	/********************************/
 	/*  User Variables              */
 	/********************************/
+	MineField field;
 };
