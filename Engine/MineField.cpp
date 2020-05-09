@@ -24,7 +24,22 @@ void MineField::Draw(Graphics& gfx)
 	}
 }
 
-void MineField::PlaceMines()
+void MineField::PlaceMines(int number)
 {
+	std::random_device rd;
+	std::mt19937 rng(rd());
+	std::uniform_int_distribution<int> place(0, numberoftiles * numberoftiles);
+
+	while (number > 0)
+	{
+		int randomnumber = place(rng);
+		int Xrand, Yrand;
+		Yrand = randomnumber / numberoftiles;
+		Xrand = randomnumber - Yrand * numberoftiles;
+		if (!tiles[Xrand][Yrand].hasMine)
+		{
+			tiles[Xrand][Yrand].hasMine = true;
+			number--;
+		}
 
 }

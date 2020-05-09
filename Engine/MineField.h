@@ -8,6 +8,7 @@ class MineField
 {
 	class Tile
 	{
+	public:
 		enum class State
 		{
 			open,
@@ -16,7 +17,7 @@ class MineField
 			exploded
 
 		};
-	public:
+	
 		State s;
 	
 		Vei2 pos;
@@ -31,6 +32,6 @@ public:
 	Tile tiles[numberoftiles][numberoftiles];
 	void Draw(Graphics& gfx);
 	RectI r = RectI(0, numberoftiles * SpriteCodex::tileSize, 0, numberoftiles * SpriteCodex::tileSize);
-	void PlaceMines();
+	void PlaceMines(int number);
 };
 
