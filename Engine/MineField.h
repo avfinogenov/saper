@@ -4,6 +4,7 @@
 #include "RectI.h"
 #include "Graphics.h"
 #include <random>
+#include "Mouse.h"
 class MineField
 {
 	class Tile
@@ -35,5 +36,7 @@ public:
 	void Draw(Graphics& gfx);
 	RectI r = RectI(0, numberoftiles * SpriteCodex::tileSize, 0, numberoftiles * SpriteCodex::tileSize);
 	void PlaceMines(int number);
+	void Update(Mouse& in_mouse);
+	Vei2 ScreenToGrid(Vei2 in_loc_screen);
 };
 

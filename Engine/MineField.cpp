@@ -78,6 +78,33 @@ void MineField::PlaceMines(int number)
 	}
 }
 
+void MineField::Update(Mouse& in_mouse)
+{
+	if (in_mouse.LeftIsPressed())
+	{
+		Vei2 tmp = in_mouse.GetPos();
+		tmp = ScreenToGrid(tmp);
+		if (tiles[tmp.x][tmp.y].hasMine)
+		{
+
+		}
+		else
+		{
+			if (tiles[tmp.x][tmp.y].StateEq(Tile::State::closed))
+			{
+				tiles[tmp.x][tmp.y].SetState(Tile::State::open);
+			}
+		}
+		
+	}
+}
+
+Vei2 MineField::ScreenToGrid(Vei2 in_loc_screen)
+{
+
+	return in_loc_screen/SpriteCodex::tileSize;
+}
+
 void MineField::Tile::SetState(State in_s)
 {
 	s = in_s;

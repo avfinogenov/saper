@@ -39,7 +39,7 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	wnd.mouse.
+	field.Update(wnd.mouse);
 }
 
 void Game::ComposeFrame()

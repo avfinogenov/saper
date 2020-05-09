@@ -23,7 +23,7 @@
 
 Vei2 Mouse::GetPos() const
 {
-	return { x,y };
+	return { y,x };
 }
 
 int Mouse::GetPosX() const
