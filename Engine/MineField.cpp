@@ -58,6 +58,10 @@ void MineField::Draw(Graphics& gfx)
 			case (Tile::State::closed):
 				SpriteCodex::DrawTileButton(tiles[i][j].pos, gfx);
 				break;
+			case (Tile::State::flagged):
+				SpriteCodex::DrawTileButton(tiles[i][j].pos, gfx);
+				SpriteCodex::DrawTileFlag(tiles[i][j].pos, gfx);
+				break;
 			}
 			
 		}
@@ -88,18 +92,27 @@ void MineField::PlaceMines(int number)
 
 void MineField::Update(Mouse& in_mouse)
 {
-
+	Vei2 tmp = in_mouse.GetPos();
+	tmp = ScreenToGrid(tmp);
 	if (in_mouse.LeftIsPressed())
 	{
-		Vei2 tmp = in_mouse.GetPos();
-		tmp = ScreenToGrid(tmp);
-		
 			if (tiles[tmp.x][tmp.y].StateEq(Tile::State::closed))
 			{
 				tiles[tmp.x][tmp.y].SetState(Tile::State::open);
 			}
 		
-		
+	}
+	if (in_mouse.RightIsPressed())
+	{
+		if (tiles[tmp.x][tmp.y].StateEq(Tile::State::closed))
+		{
+			tiles[tmp.x][tmp.y].SetState(Tile::State::flagged);
+		} else
+		if (tiles[tmp.x][tmp.y].StateEq(Tile::State::flagged))
+		{
+			tiles[tmp.x][tmp.y].SetState(Tile::State::closed);
+		}
+
 	}
 }
 

@@ -46,6 +46,10 @@ void Game::UpdateModel()
 		{
 			field.Update(wnd.mouse);
 		}
+		if (e.GetType() == Mouse::Event::Type::RPress)
+		{
+			field.Update(wnd.mouse);
+		}
 	}
 	//field.Update(wnd.mouse);
 }
