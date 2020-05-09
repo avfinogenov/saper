@@ -9,7 +9,7 @@ void MineField::InitTiles()
 			tiles[i][j].pos = Vei2((j * SpriteCodex::tileSize), (i * SpriteCodex::tileSize));
 		}
 	}
-	
+	PlaceMines(10);
 }
 
 void MineField::Draw(Graphics& gfx)
@@ -42,4 +42,5 @@ void MineField::PlaceMines(int number)
 			number--;
 		}
 
+	}
 }
