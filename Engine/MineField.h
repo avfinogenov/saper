@@ -40,6 +40,7 @@ class MineField
 		int bombcountsur = 0;
 	};
 	const static int numberoftiles = 20;
+	bool GameOver = false;
 public:
 	void InitTiles();
 	Tile tiles[numberoftiles][numberoftiles];

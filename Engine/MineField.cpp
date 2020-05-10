@@ -3,7 +3,7 @@
 
 void MineField::InitTiles()
 {
-	for (int i = 0; i < numberoftiles; i++) //устанавливает позицию €чейки в центр
+	for (int i = 0; i < numberoftiles; i++) 
 	{
 		for (int j = 0; j < numberoftiles; j++)
 		{
@@ -12,7 +12,7 @@ void MineField::InitTiles()
 		}
 	}
 	PlaceMines(10);
-	for (int i = 0; i < numberoftiles; i++) //устанавливает позицию €чейки в центр
+	for (int i = 0; i < numberoftiles; i++) 
 	{
 		for (int j = 0; j < numberoftiles; j++)
 		{
@@ -59,7 +59,8 @@ void MineField::Draw(Graphics& gfx)
 				if (tiles[i][j].hasMine)
 				{
 					//SpriteCodex::DrawTile0(tiles[i][j].pos, gfx);
-					SpriteCodex::DrawTileBomb(tiles[i][j].pos, gfx);
+					SpriteCodex::DrawTileBombRed(tiles[i][j].pos, gfx);
+					GameOver = true;
 				}
 				else
 				{
@@ -99,11 +100,40 @@ void MineField::Draw(Graphics& gfx)
 				break;
 
 			case (Tile::State::closed):
-				SpriteCodex::DrawTileButton(tiles[i][j].pos, gfx);
+				if (!GameOver)
+				{
+					SpriteCodex::DrawTileButton(tiles[i][j].pos, gfx);
+				}
+				else
+				{
+					if (tiles[i][j].hasMine)
+					{
+						SpriteCodex::DrawTileBomb(tiles[i][j].pos, gfx);
+					}
+					else
+					{
+						SpriteCodex::DrawTileButton(tiles[i][j].pos, gfx);
+					}
+					
+				}
 				break;
 			case (Tile::State::flagged):
-				SpriteCodex::DrawTileButton(tiles[i][j].pos, gfx);
-				SpriteCodex::DrawTileFlag(tiles[i][j].pos, gfx);
+				if (!GameOver)
+				{
+					SpriteCodex::DrawTileButton(tiles[i][j].pos, gfx);
+					SpriteCodex::DrawTileFlag(tiles[i][j].pos, gfx);
+				}
+				else
+				{
+					if (!tiles[i][j].hasMine)
+					{
+						SpriteCodex::DrawTileCross(tiles[i][j].pos, gfx);
+					}
+					else
+					{
+						SpriteCodex::DrawTileFlag(tiles[i][j].pos, gfx);
+					}
+				}
 				break;
 			}
 			
