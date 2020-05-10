@@ -15,8 +15,17 @@ class MineField
 			open,
 			closed,
 			flagged,
-			exploded
-		
+			exploded,
+			one,
+			two,
+			three,
+			four,
+			five,
+			six,
+			seven,
+			eight,
+			nine
+			
 			//State& operator+=(const Vei2& rhs);
 		};
 	
@@ -27,7 +36,7 @@ class MineField
 		bool hasMine = false;
 		void SetState(State in_s);
 		bool StateEq(State in_s);
-
+		int bombcountsur = 0;
 	};
 	const static int numberoftiles = 20;
 public:
@@ -38,5 +47,6 @@ public:
 	void PlaceMines(int number);
 	void Update(Mouse& in_mouse);
 	Vei2 ScreenToGrid(Vei2 in_loc_screen);
+	void CountSurBombs(Vei2 loc);
 };
 

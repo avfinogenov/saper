@@ -1,4 +1,5 @@
 #include "MineField.h"
+#include <algorithm>
 
 void MineField::InitTiles()
 {
@@ -11,7 +12,14 @@ void MineField::InitTiles()
 		}
 	}
 	PlaceMines(10);
+	for (int i = 0; i < numberoftiles; i++) //устанавливает позицию €чейки в центр
+	{
+		for (int j = 0; j < numberoftiles; j++)
+		{
+			CountSurBombs(Vei2(i,j));
 
+		}
+	}
 
 	////tmp
 	//int count = 10;
@@ -51,7 +59,38 @@ void MineField::Draw(Graphics& gfx)
 				}
 				else
 				{
-					SpriteCodex::DrawTile0(tiles[i][j].pos, gfx);
+					//SpriteCodex::DrawTile0(tiles[i][j].pos, gfx);
+					switch (tiles[i][j].bombcountsur)
+					{
+					case 0:
+						SpriteCodex::DrawTile0(tiles[i][j].pos, gfx);
+						break;
+					case 1:
+						SpriteCodex::DrawTile1(tiles[i][j].pos, gfx);
+						break;
+					case 2:
+						SpriteCodex::DrawTile2(tiles[i][j].pos, gfx);
+						break;
+					case 3:
+						SpriteCodex::DrawTile3(tiles[i][j].pos, gfx);
+						break;
+					case 4:
+						SpriteCodex::DrawTile4(tiles[i][j].pos, gfx);
+						break;
+					case 5:
+						SpriteCodex::DrawTile5(tiles[i][j].pos, gfx);
+						break;
+					case 6:
+						SpriteCodex::DrawTile6(tiles[i][j].pos, gfx);
+						break;
+					case 7:
+						SpriteCodex::DrawTile7(tiles[i][j].pos, gfx);
+						break;
+					case 8:
+						SpriteCodex::DrawTile8(tiles[i][j].pos, gfx);
+						break;
+					
+					}
 				}
 				break;
 
@@ -120,6 +159,24 @@ Vei2 MineField::ScreenToGrid(Vei2 in_loc_screen)
 {
 
 	return in_loc_screen/SpriteCodex::tileSize;
+}
+
+void MineField::CountSurBombs(Vei2 loc)
+{
+	int is = std::max(0, loc.x-1);
+	int js = std::max(0, loc.y-1);
+	int ie = std::min(numberoftiles, loc.x+1);
+	int je = std::min(numberoftiles, loc.y + 1);
+	for (; is <= ie; is++)
+	{
+		for (int js = std::max(0, loc.y - 1); js <= je; js++)
+		{
+			if (tiles[is][js].hasMine)
+				tiles[loc.x][loc.y].bombcountsur++;
+			
+		}
+	}
+
 }
 
 void MineField::Tile::SetState(State in_s)
