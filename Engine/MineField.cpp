@@ -11,7 +11,7 @@ void MineField::InitTiles()
 			
 		}
 	}
-	PlaceMines(10);
+	PlaceMines(50);
 	for (int i = 0; i < numberoftiles; i++) 
 	{
 		for (int j = 0; j < numberoftiles; j++)
@@ -127,6 +127,7 @@ void MineField::Draw(Graphics& gfx)
 				{
 					if (!tiles[i][j].hasMine)
 					{
+						SpriteCodex::DrawTileButton(tiles[i][j].pos, gfx);
 						SpriteCodex::DrawTileCross(tiles[i][j].pos, gfx);
 					}
 					else
