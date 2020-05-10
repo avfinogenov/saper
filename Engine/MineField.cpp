@@ -17,7 +17,11 @@ void MineField::InitTiles()
 		for (int j = 0; j < numberoftiles; j++)
 		{
 			CountSurBombs(Vei2(i,j));
-
+			//if (i == numberoftiles - 1)
+			//{
+			//	int tmp = 0;
+			//	tmp++;
+			//}
 		}
 	}
 
@@ -137,6 +141,10 @@ void MineField::Update(Mouse& in_mouse)
 	{
 			if (tiles[tmp.x][tmp.y].StateEq(Tile::State::closed))
 			{
+				if (tiles[tmp.x][tmp.y].bombcountsur == 0)
+				{
+					OpenSurTiles(tmp.x, tmp.y);
+				}
 				tiles[tmp.x][tmp.y].SetState(Tile::State::open);
 			}
 		
@@ -164,9 +172,9 @@ Vei2 MineField::ScreenToGrid(Vei2 in_loc_screen)
 void MineField::CountSurBombs(Vei2 loc)
 {
 	int is = std::max(0, loc.x-1);
-	int js = std::max(0, loc.y-1);
-	int ie = std::min(numberoftiles, loc.x+1);
-	int je = std::min(numberoftiles, loc.y + 1);
+	//int js = std::max(0, loc.y-1);
+	int ie = std::min(numberoftiles-1, loc.x+1);
+	int je = std::min(numberoftiles-1, loc.y + 1);
 	for (; is <= ie; is++)
 	{
 		for (int js = std::max(0, loc.y - 1); js <= je; js++)
@@ -177,6 +185,31 @@ void MineField::CountSurBombs(Vei2 loc)
 		}
 	}
 
+}
+
+void MineField::OpenSurTiles(int i, int j)
+{
+	int is = std::max(0, i - 1);
+	//int js = std::max(0, loc.y-1);
+	int ie = std::min(numberoftiles, i + 1);
+	int je = std::min(numberoftiles, j + 1);
+	for (; is <= ie; is++)
+	{
+		for (int js = std::max(0, j - 1); js <= je; js++)
+		{
+			if (tiles[is][js].bombcountsur == 0)
+			{
+			if (!tiles[is][js].iscounted)
+			{
+				tiles[is][js].SetState(Tile::State::open);
+				tiles[is][js].iscounted = true;
+					OpenSurTiles(is, js);
+				}
+				
+			}
+
+		}
+	}
 }
 
 void MineField::Tile::SetState(State in_s)

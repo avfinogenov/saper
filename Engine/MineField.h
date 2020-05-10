@@ -36,6 +36,7 @@ class MineField
 		bool hasMine = false;
 		void SetState(State in_s);
 		bool StateEq(State in_s);
+		bool iscounted = false;
 		int bombcountsur = 0;
 	};
 	const static int numberoftiles = 20;
@@ -48,5 +49,6 @@ public:
 	void Update(Mouse& in_mouse);
 	Vei2 ScreenToGrid(Vei2 in_loc_screen);
 	void CountSurBombs(Vei2 loc);
+	void OpenSurTiles(int i, int j);
 };
 
